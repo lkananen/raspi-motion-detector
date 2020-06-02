@@ -1,6 +1,11 @@
 from picamera import PiCamera
 from time import sleep
 import os
+import telegram
+import config
+
+# Token stored as a secret and fetched from another file
+bot = telegram.Bot(token=config.telegram_bot_token)
 
 def log(msg):
     # Customized print function
@@ -41,7 +46,7 @@ def run_snap_loop(camera, s_interval=10, n_tempfiles=2,
 
 def main():
     camera = setup_camera()
-    run_snap_loop(camera)
+    #run_snap_loop(camera)
 
 if __name__ == "__main__":
     main()
