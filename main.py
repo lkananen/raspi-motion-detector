@@ -2,6 +2,7 @@ from picamera import PiCamera
 from time import sleep
 import os
 import telegram
+import numpy as np
 import config
 
 # Token stored as a secret and fetched from another file
@@ -32,6 +33,18 @@ def setup_camera():
 
     log("Setup complete!")
     return cam
+
+def count_img_diff(img1, img2):
+    # Given two 3-channel images with value range of (0, 255),
+    # returns difference percentage based on the number of different pixels.
+    # Epsilon controls the allowed pixel level difference.
+    epsilon = 10.0
+    
+    diff = img1 - img2
+    pixel_diff = (diff >= epsilon).astype(int)
+    diff_percentage = np.count_nonzero(pixel_diff) / np.size(diff)
+    return diff_percentage
+
 
 def capture_img(camera, filename):
     camera.capture(filename)
