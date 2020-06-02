@@ -75,6 +75,7 @@ def run_snap_loop(camera, s_interval=1, n_tempfiles=2,
 
     diff_from_prev_img = 0.0
     diff_threshold = 0.1
+    diff_threshold_telegram = 0.2
 
     while True:
         sleep(s_interval)
@@ -95,6 +96,9 @@ def run_snap_loop(camera, s_interval=1, n_tempfiles=2,
         if diff_from_prev_img > diff_threshold:
             print("Motion detected!")
             print("Difference: " + str(round(diff_from_prev_img * 100, 1)) + "%")
+
+        if diff_from_prev_img > diff_threshold_telegram:
+            bot_message("Object detected!")
 
         # When iterator reaches n it resets to zero
         tempfile_num_iter = (tempfile_num_iter + 1) % n_tempfiles
