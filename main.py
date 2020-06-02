@@ -4,6 +4,7 @@ import os
 import telegram
 import numpy as np
 import config
+import matplotlib.pyplot as plt
 
 # Token stored as a secret and fetched from another file
 bot = telegram.Bot(token=config.telegram_bot_token)
@@ -34,13 +35,31 @@ def setup_camera():
     log("Setup complete!")
     return cam
 
+def find_img_names(path):
+    # Returns found filenames
+    filetype = "jpg"
+    return [i for i in os.listdir(path) \
+            if ''.join(reversed(i[-1:-4:-1])) == filetype]
+
+def get_img_num(name):
+    # Extracts the image number from its name.
+    # E.g. image71.jpg -> 71
+    return int(name[len("image") : (len(name) - len(".jpg"))])
+
+def img_to_grayscale(img):
+    # Uses Luma coding grayscale conversion for RGB images.
+    luma_conversion_component = [0.2989, 0.5870, 0.1140]
+    gray_converter = lambda rgb: np.dot(rgb[..., :3], luma_conversion_component)
+
+    return gray_converter(img)
+
 def count_img_diff(img1, img2):
     # Given two 3-channel images with value range of (0, 255),
     # returns difference percentage based on the number of different pixels.
     # Epsilon controls the allowed pixel level difference.
-    epsilon = 10.0
+    epsilon = 5
     
-    diff = img1 - img2
+    diff = img_to_grayscale(img1) - img_to_grayscale(img2)
     pixel_diff = (diff >= epsilon).astype(int)
     diff_percentage = np.count_nonzero(pixel_diff) / np.size(diff)
     return diff_percentage
@@ -49,17 +68,33 @@ def count_img_diff(img1, img2):
 def capture_img(camera, filename):
     camera.capture(filename)
 
-def run_snap_loop(camera, s_interval=10, n_tempfiles=2,
+def run_snap_loop(camera, s_interval=1, n_tempfiles=2,
                   save_location=os.getcwd()):
     tempfile_num_iter = 0
+    temp_folder = os.path.join(save_location, "temp")
+
+    diff_from_prev_img = 0.0
+    diff_threshold = 0.1
 
     while True:
         sleep(s_interval)
 
         # Take a snapshot
-        filename = os.path.join(save_location, "temp",
+        img_filename = os.path.join(temp_folder, \
                                 "image%s.jpg" %str(tempfile_num_iter))
-        capture_img(camera, filename)
+        capture_img(camera, img_filename)
+
+        # Compare to previous image if that exists
+        prev_image_filename = os.path.join(temp_folder, \
+                    "image%s.jpg" %str((tempfile_num_iter - 1) % n_tempfiles))
+        if os.path.exists(prev_image_filename):
+            img_now = plt.imread(img_filename)
+            img_prev = plt.imread(prev_image_filename)
+            diff_from_prev_img = count_img_diff(img_now, img_prev)
+
+        if diff_from_prev_img > diff_threshold:
+            print("Motion detected!")
+            print("Difference: " + str(round(diff_from_prev_img * 100, 1)) + "%")
 
         # When iterator reaches n it resets to zero
         tempfile_num_iter = (tempfile_num_iter + 1) % n_tempfiles
