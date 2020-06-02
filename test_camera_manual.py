@@ -53,9 +53,9 @@ def rec(camera, loc=os.getcwd(), s_length=1, with_preview=False):
 def main():
     camera = setup_cam()
 
-    #run_camera(5)
-    #snaps(camera, n_imgs=5)
-    #rec(camera)
+    run_camera(5)
+    snaps(camera, n_imgs=5)
+    rec(camera)
 
     print("Success!")
 
