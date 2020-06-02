@@ -1,15 +1,15 @@
-import picamera.PiCamera
+from picamera import PiCamera
 from time import sleep
 import os
 
 def log(msg):
     # Customized print function
-    print("> ",end="")
+    print("> ", end="")
     print(msg)
 
 def setup_camera():
     # Camera initializer
-    cam = picamera.PiCamera()
+    cam = PiCamera()
     cam.rotation = 0
     cam.resolution = (1280, 720)
     cam.framerate = 30
@@ -32,7 +32,7 @@ def run_snap_loop(camera, s_interval=1, n_tempfiles=2,
 
         # Take a snapshot
         filename = os.path.join(save_location, "temp",
-                                "image&s.jpg" %tempfile_num_iter)
+                                "image%s.jpg" %str(tempfile_num_iter))
         capture_img(camera, filename)
 
         # When iterator reaches n it resets to zero
