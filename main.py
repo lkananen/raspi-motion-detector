@@ -12,6 +12,14 @@ def log(msg):
     print("> ", end="")
     print(msg)
 
+def bot_message(msg, chat_id=config.telegram_chat_id):
+    # Sends a message through the Telegram bot to a specific chat
+    bot.sendMessage(chat_id=chat_id, text=msg)
+
+def bot_cleanup():
+    # Telegram bot cleanup actions
+    bot_message("Motion detector shutting down!")
+
 def setup_camera():
     # Camera initializer
     cam = PiCamera()
@@ -46,7 +54,12 @@ def run_snap_loop(camera, s_interval=10, n_tempfiles=2,
 
 def main():
     camera = setup_camera()
-    #run_snap_loop(camera)
+    bot_message("Motion detector running!")
+
+    try:
+        run_snap_loop(camera)
+    finally:
+        bot_cleanup()
 
 if __name__ == "__main__":
     main()
