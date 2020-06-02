@@ -23,7 +23,7 @@ def setup_camera():
 def capture_img(camera, filename):
     camera.capture(filename)
 
-def run_snap_loop(camera, s_interval=1, n_tempfiles=2,
+def run_snap_loop(camera, s_interval=10, n_tempfiles=2,
                   save_location=os.getcwd()):
     tempfile_num_iter = 0
 
@@ -41,6 +41,7 @@ def run_snap_loop(camera, s_interval=1, n_tempfiles=2,
 
 def main():
     camera = setup_camera()
+    run_snap_loop(camera)
 
 if __name__ == "__main__":
     main()
