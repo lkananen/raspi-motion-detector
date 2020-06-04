@@ -154,13 +154,17 @@ def run_snap_loop(camera: PiCamera, s_interval: int = 1,
         sleep(s_interval)
 
         # Take a snapshot
-        img_filename = os.path.join(temp_folder, \
-                                "image%s.jpg" %str(tempfile_num_iter))
+        img_filename = os.path.join(
+            temp_folder,
+            "image%s.jpg" % str(tempfile_num_iter)
+        )
         capture_img(camera, img_filename)
 
         # Compare to previous image if that exists
-        prev_image_filename = os.path.join(temp_folder, \
-                    "image%s.jpg" %str((tempfile_num_iter - 1) % n_tempfiles))
+        prev_image_filename = os.path.join(
+            temp_folder,
+            "image%s.jpg" %str((tempfile_num_iter - 1) % n_tempfiles)
+        )
         if os.path.exists(prev_image_filename):
             img_now = plt.imread(img_filename)
             img_prev = plt.imread(prev_image_filename)
