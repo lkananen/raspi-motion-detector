@@ -177,7 +177,9 @@ def run_snap_loop(camera: PiCamera, s_interval: int = 1,
         tempfile_num_iter = (tempfile_num_iter + 1) % n_tempfiles
 
 
-def main():
+def run_motion_detector():
+    """ Runs setup, main program loop and after executin cleanup.
+    """
     camera = setup_camera()
     bot_message("Motion detector running!")
 
@@ -185,6 +187,10 @@ def main():
         run_snap_loop(camera)
     finally:
         bot_cleanup()
+
+
+def main():
+    run_motion_detector()
 
 
 if __name__ == "__main__":
