@@ -25,7 +25,7 @@ def bot_message(msg: str, chat_id: str = config.telegram_chat_id):
     """
     # Loop in case the sending fails
     max_retries = 5
-    for i in range(5):
+    for i in range(max_retries):
         try:
             bot.sendMessage(chat_id=chat_id, text=msg)
             break
