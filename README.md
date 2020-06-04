@@ -11,9 +11,11 @@ Raspberry Pi and camera module based motion detector that send notifications of 
   - [Requirements](#requirements)
     - [Hardware requirements](#hardware-requirements)
     - [Software requirements](#software-requirements)
-  - [How to run](#how-to-run)
+  - [How to run (development)](#how-to-run-development)
     - [Step by step instructions](#step-by-step-instructions)
     - [Testing](#testing)
+  - [How to run (production)](#how-to-run-production)
+    - [Step by step instructions](#step-by-step-instructions-1)
 
 
 ## Directory structure
@@ -65,7 +67,7 @@ The program has been tested to work with Raspberry Pi Camera module v2. Other su
   - An account
   - A bot user
 
-## How to run
+## How to run (development)
 Set up the hardware, gather required software, create telegram bot, obtain the bot token and your Telegram chat id.
 
 ### Step by step instructions
@@ -81,13 +83,20 @@ Set up the hardware, gather required software, create telegram bot, obtain the b
    <BotName>
    <BotUsername_bot>
    ```
-   1. Get the HTTP API access token. Example token: `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`.
+   1. Get the HTTP API access token.
+      1. Example: `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`.
    2. Save the token to `secrets.py` as `telegram_bot_token`.
       1. `telegram_bot_token="XXXXXX:XX-XXXX-XXXXX-XXXXX"`
-   3. Find the bot by name and send some message to it.
-   4. Go to see your bot's message history from the API. Example addess: `https://api.telegram.org/bot123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11/getUpdates`. Fill in your token to the address.
-   5. Obtain the chat id of your user. Save it to `secrets.py` as `telegram_chat_id`.
-      1. `telegram_chat_id="XXXXXXXXXX"`
+   3. Message your bot.
+      1. Find the bot by name.
+      2. Send some message to it.
+   4. Check bot's message history for your chat id.
+      1. Go to see your bot's message history from the API.
+      2. Fill in your token to the address.
+      3. Example: `https://api.telegram.org/bot123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11/getUpdates`.
+   5. Obtain the chat id of your user as a secret.
+      1. Save the ID to `secrets.py` as `telegram_chat_id`.
+      2. Example: `telegram_chat_id="XXXXXXXXXX"`
    6. Documentation (in case something fails):  
    [Telegram bots](https://core.telegram.org/bots)
 4. Setup the camera module for the Raspberry Pi.
@@ -103,3 +112,24 @@ Set up the hardware, gather required software, create telegram bot, obtain the b
   - Camera module testing. Can be used to manually check that image capture and video recording works.
 - `test_img_diff.py`
   - Image difference calculation logic test file.
+
+## How to run (production)
+Once the development is working the program can be changed to run on startup.
+
+### Step by step instructions
+1. Create `MotionDetector.desktop` file to `/home/pi/.config/autostart/`.
+   1. `cd /home/pi/.config/autostart/`
+   2. `touch MotionDetector.desktop`
+2. Write the following content to that file:
+```
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=MotionDetector
+Comment=This runs the motion detector on startup.
+Exec=  python /home/pi/raspi-motion-detector/main.py
+StartupNotify=false
+Terminal=true
+Hidden=false
+```
+3. Reboot.
