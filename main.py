@@ -115,7 +115,7 @@ def count_img_diff(img1: np.ndarray, img2: np.ndarray) -> float:
     
     delta = img_to_grayscale(img1) - img_to_grayscale(img2)
     pixel_diff = (delta >= epsilon).astype(int)
-    diff_percentage = np.count_nonzero(pixel_diff) / np.size(diff)
+    diff_percentage = np.count_nonzero(pixel_diff) / np.size(delta)
     return diff_percentage
 
 
