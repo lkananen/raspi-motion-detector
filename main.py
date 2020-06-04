@@ -62,14 +62,18 @@ def img_to_grayscale(img):
 
     return gray_converter(img)
 
+def get_delta_img(img1, img2):
+    delta_img = abs(img_to_grayscale(img1) - img_to_grayscale(img2))
+    return delta_img.astype(int)
+
 def count_img_diff(img1, img2):
     # Given two 3-channel images with value range of (0, 255),
     # returns difference percentage based on the number of different pixels.
     # Epsilon controls the allowed pixel level difference.
     epsilon = 5
     
-    diff = img_to_grayscale(img1) - img_to_grayscale(img2)
-    pixel_diff = (diff >= epsilon).astype(int)
+    delta = img_to_grayscale(img1) - img_to_grayscale(img2)
+    pixel_diff = (delta >= epsilon).astype(int)
     diff_percentage = np.count_nonzero(pixel_diff) / np.size(diff)
     return diff_percentage
 
