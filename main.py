@@ -79,7 +79,7 @@ def get_img_num(name: str) -> int:
     """
     prefix = "image"
     suffix = ".jpg"
-    return int(name[len("prefix") : (len(name) - len(suffix))])
+    return int(name[len(prefix) : (len(name) - len(suffix))])
 
 
 def img_to_grayscale(img: np.ndarray) -> np.ndarray:
