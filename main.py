@@ -98,7 +98,7 @@ def img_to_grayscale(img: np.ndarray) -> np.ndarray:
 
 def get_delta_img(img1: np.ndarray, img2: np.ndarray) -> np.ndarray:
     delta_img = abs(img_to_grayscale(img1) - img_to_grayscale(img2))
-    return (delta_img * 255).astype(uint8)
+    return (delta_img * 255).astype(np.uint8)
 
 
 def count_img_diff(img1: np.ndarray, img2: np.ndarray) -> float:
