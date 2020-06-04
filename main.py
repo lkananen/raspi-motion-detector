@@ -93,12 +93,12 @@ def img_to_grayscale(img: np.ndarray) -> np.ndarray:
     luma_conversion_component = [0.2989, 0.5870, 0.1140]
     gray_converter = lambda rgb: np.dot(rgb[..., :3], luma_conversion_component)
 
-    return gray_converter(img)
+    return gray_converter(img.astype(float))
 
 
 def get_delta_img(img1: np.ndarray, img2: np.ndarray) -> np.ndarray:
     delta_img = abs(img_to_grayscale(img1) - img_to_grayscale(img2))
-    return delta_img.astype(int)
+    return (delta_img * 255).astype(uint8)
 
 
 def count_img_diff(img1: np.ndarray, img2: np.ndarray) -> float:
