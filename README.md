@@ -54,4 +54,4 @@ TODO: detailed list coming soon
    8. Further documentation: [Telegram bots](https://core.telegram.org/bots)
 4. Setup the camera module for the Raspberry Pi.
    1. TODO: more instructions related to this coming soon.
-5. Run `main.py`.
+5. Run `python main.py`.
