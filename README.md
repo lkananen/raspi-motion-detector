@@ -8,10 +8,10 @@ Raspberry Pi and camera module based motion detector that send notifications of 
     - [Overall picture](#overall-picture)
     - [Detailed list](#detailed-list)
   - [Architecture](#architecture)
+  - [Requirements](#requirements)
+    - [Hardware requirements](#hardware-requirements)
+    - [Software requirements](#software-requirements)
   - [How to run](#how-to-run)
-    - [Requirements](#requirements)
-      - [Hardware requirements](#hardware-requirements)
-      - [Software requirements](#software-requirements)
     - [Step by step instructions](#step-by-step-instructions)
     - [Testing](#testing)
 
@@ -51,20 +51,22 @@ The program constantly captures images on certain intervals. Upon detecting moti
     <!-- ![Diagram](./assets/Diagram.jpg) -->
 </p>
 
-## How to run
-Set up the hardware, gather required software, create telegram bot, obtain the bot token and your Telegram chat id.
-
-### Requirements
-#### Hardware requirements
+## Requirements
+### Hardware requirements
 - Raspberry Pi
 - Raspberry Pi Camera module v2
 
 The program has been tested to work with Raspberry Pi Camera module v2. Other support not guaranteed.
 
-#### Software requirements
+### Software requirements
 - Python
   - Packages in: `requirements.txt`
-- Telegram account
+- Telegram
+  - An account
+  - A bot user
+
+## How to run
+Set up the hardware, gather required software, create telegram bot, obtain the bot token and your Telegram chat id.
 
 ### Step by step instructions
 1. Clone the repository.
