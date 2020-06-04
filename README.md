@@ -5,6 +5,8 @@ Raspberry Pi and camera module based motion detector.
 - [Camera image motion detector](#camera-image-motion-detector)
   - [Table of Contents](#table-of-contents)
   - [Directory structure](#directory-structure)
+    - [Overall picture](#overall-picture)
+    - [Detailed list](#detailed-list)
   - [Architecture](#architecture)
   - [How to run](#how-to-run)
     - [Requirements](#requirements)
@@ -12,6 +14,24 @@ Raspberry Pi and camera module based motion detector.
 
 
 ## Directory structure
+### Overall picture
+```
+ root
+ ├── assets
+ |    ├── Diagram.drawio
+ |    └── Diagram.jpg
+ ├── scripts
+ |    ├── test_bot_manual.py
+ |    ├── test_camera_manual.py
+ |    └── test_img_diff.py
+ ├── .gitignore
+ ├── REAME.md
+ ├── config.py
+ ├── main.py
+ └── requirements.txt
+```
+
+### Detailed list
 - `assets` Readme related web site assets.
 - `scripts` Smaller parts of the application used to test out things.
 - `config.py` Configurations for the application.
