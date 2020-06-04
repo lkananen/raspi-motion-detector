@@ -16,7 +16,16 @@ def log(msg):
 
 def bot_message(msg, chat_id=config.telegram_chat_id):
     # Sends a message through the Telegram bot to a specific chat
-    bot.sendMessage(chat_id=chat_id, text=msg)
+    
+    # Loop in case the sending fails
+    max_retries = 5
+    for i in range(5):
+        try:
+            bot.sendMessage(chat_id=chat_id, text=msg)
+            break
+        except Exception as e:
+            print(e)
+            sleep(0.3)
 
 def bot_cleanup():
     # Telegram bot cleanup actions
