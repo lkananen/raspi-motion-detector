@@ -83,21 +83,21 @@ Set up the hardware, gather required software, create telegram bot, obtain the b
    <BotName>
    <BotUsername_bot>
    ```
-   1. Get the HTTP API access token.
+   3. Get the HTTP API access token.
       1. Example: `123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`.
-   2. Save the token to `secrets.py` as `telegram_bot_token`.
+   4. Save the token to `secrets.py` as `telegram_bot_token`.
       1. `telegram_bot_token="XXXXXX:XX-XXXX-XXXXX-XXXXX"`
-   3. Message your bot.
+   5. Message your bot.
       1. Find the bot by name.
       2. Send some message to it.
-   4. Check bot's message history for your chat id.
+   6. Check bot's message history for your chat id.
       1. Go to see your bot's message history from the API.
       2. Fill in your token to the address.
       3. Example: `https://api.telegram.org/bot123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11/getUpdates`.
-   5. Obtain the chat id of your user as a secret.
+   7. Obtain the chat id of your user as a secret.
       1. Save the ID to `secrets.py` as `telegram_chat_id`.
       2. Example: `telegram_chat_id="XXXXXXXXXX"`
-   6. Documentation (in case something fails):  
+   8. Documentation (in case something fails):  
    [Telegram bots](https://core.telegram.org/bots)
 4. Setup the camera module for the Raspberry Pi.
    1. Documentation:  
