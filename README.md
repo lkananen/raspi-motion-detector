@@ -1,5 +1,5 @@
 # Camera image motion detector
-Raspberry Pi and camera module based motion detector.
+Raspberry Pi and camera module based motion detector that send notifications of movement to Telegram.
 
 ## Table of Contents
 - [Camera image motion detector](#camera-image-motion-detector)
