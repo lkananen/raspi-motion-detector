@@ -30,7 +30,7 @@ Raspberry Pi and camera module based motion detector that send notifications of 
  |    ├── test_camera_manual.py
  |    └── test_img_diff.py
  ├── .gitignore
- ├── REAME.md
+ ├── README.md
  ├── config.py
  ├── main.py
  └── requirements.txt
